@@ -1,0 +1,37 @@
+{%extends 'base.html'%}
+
+{%block body%}
+
+<div class="container mt-4">
+    <div class="row g-3">
+        
+{%for i in data%}
+        <div class="col-6 col-md-4 col-lg-3">
+    <a href="{%url 'details' i.id %}" class="text-decoration-none text-dark"232131>
+
+            <div class="card h-100 shadow-sm">
+
+                <img src="{{i.image.url}}"
+                     class="card-img-top"
+                     alt="Product"
+                     style="height:180px; object-fit:cover;"
+                     >
+
+                <div class="card-body">
+
+                    <h6 class="card-title">
+                        name:{{i.name}}
+                    </h6>
+
+                    <h5 class="text-danger">
+                        price:{{i.price}}
+                    </h5>
+                </div>
+
+            </div>
+            </a>
+        </div>
+        {%endfor%}
+             </div>
+             </div>
+{% endblock %}

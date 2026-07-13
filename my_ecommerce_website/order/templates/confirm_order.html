@@ -1,0 +1,60 @@
+{%extends 'base.html'%}
+
+{%block body%}
+
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-6">
+
+            <div class="card border-0 shadow-lg rounded-4">
+
+                <div class="card-body p-5">
+
+                    <!-- Header -->
+                    <div class="text-center mb-4">
+
+                        <div class="bg-warning rounded-circle d-inline-flex justify-content-center align-items-center"
+                             style="width:80px;height:80px;">
+                            <i class="fa-solid fa-circle-exclamation text-white fs-2"></i>
+                        </div>
+
+                        <h2 class="fw-bold mt-3">
+                            Confirm Your Order
+                        </h2>
+
+                        <p class="text-muted mb-0">
+                            Are you sure you want to place this order?
+                        </p>
+
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="d-flex justify-content-between mt-4">
+
+                        <a href="{% url 'buy_now' %}"
+                           class="btn btn-outline-secondary px-4">
+                            Cancel
+                        </a>
+<a href="{% url 'confirm_order' %}">
+                            <button type="submit"
+                                    class="btn btn-success px-4">
+                                <i class="fa-solid fa-check me-2"></i>
+                                Confirm Order
+                            </button>
+</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{%endblock%}

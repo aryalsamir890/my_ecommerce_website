@@ -1,0 +1,81 @@
+{%extends 'base.html'%}
+
+{%block body%}
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-7">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <div class="card-body text-center p-5">
+
+                    <!-- Success Icon -->
+                    <div class="mb-4">
+                        <div class="bg-success rounded-circle d-inline-flex justify-content-center align-items-center"
+                             style="width:90px;height:90px;">
+                            <i class="fa-solid fa-check text-white fs-1"></i>
+                        </div>
+                    </div>
+
+                    <!-- Heading -->
+                    <h2 class="fw-bold text-success">
+                        Order Placed Successfully!
+                    </h2>
+
+                    <p class="text-muted mb-4">
+                        Thank you for your purchase. Your order has been received successfully.
+                    </p>
+
+                    <hr>
+
+                    <!-- Order Details -->
+                    <div class="row text-start mt-4">
+
+                        <div class="col-6 mb-3">
+                            <h6 class="text-secondary">Order ID</h6>
+                            <p class="fw-semibold mb-0">
+                                {{value.id}}
+                            </p>
+                        </div>
+
+                        <div class="col-6 mb-3">
+                            <h6 class="text-secondary">Payment Method</h6>
+                            <p class="fw-semibold mb-0">
+                                {{value.payment_method}}
+                            </p>
+                        </div>
+
+                        <div class="col-6 mb-3">
+                            <h6 class="text-secondary">Estimated Delivery</h6>
+                            <p class="fw-semibold mb-0">
+                                3 - 5 Days
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <!-- Buttons -->
+                    <div class="d-grid gap-3 d-md-flex justify-content-center mt-4">
+
+                        <a href="{%url 'home'%}"
+                           class="btn btn-outline-secondary px-4">
+                            <i class="fa-solid fa-house me-2"></i>
+                            Continue Shopping
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{%endblock%}

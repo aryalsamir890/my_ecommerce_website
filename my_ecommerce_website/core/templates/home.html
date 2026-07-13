@@ -1,0 +1,135 @@
+{%extends 'base.html'%}
+
+{%block title%}
+my homepage
+{%endblock%}
+
+{%block body%}
+{% if messages %}
+<div class="position-fixed top-0 start-50 translate-middle-x mt-3"
+     style="z-index: 9999; width: 500px; max-width: 90%;">
+
+    {% for message in messages %}
+        <div class="alert
+            {% if message.tags == 'success' %}
+                bg-success-subtle text-success border border-success-subtle
+            {% elif message.tags == 'error' or message.tags == 'danger' %}
+                bg-danger-subtle text-danger border border-danger-subtle
+            {% elif message.tags == 'warning' %}
+                bg-warning-subtle text-warning border border-warning-subtle
+            {% else %}
+                bg-info-subtle text-info border border-info-subtle
+            {% endif %}
+            alert-dismissible fade show shadow"
+            role="alert">
+
+            <strong>
+                {% if message.tags == 'success' %}
+                    ✓ Success!
+                {% elif message.tags == 'error' or message.tags == 'danger' %}
+                    ✕ Error! : 
+                {% elif message.tags == 'warning' %}
+                    ⚠ Warning!
+                {% else %}
+                    ℹ Info
+                {% endif %}
+            </strong>
+
+            {{ message }}
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+</div>
+{% endif %}
+ <div id="adCarousel" class="carousel slide mb-4 " data-bs-ride="carousel"> 
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#adCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#adCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#adCarousel" data-bs-slide-to="2"></button>
+    </div>
+
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="/media/photos/ad3.jpg"
+                 class="d-block w-5"
+                 alt="Ad 1"
+                 style="height:400px; object-fit:cover;">
+        </div>
+
+        <div class="carousel-item">
+            <img src="/media/photos/ad2.jpg"
+                 class="d-block w-100"
+                 alt="Ad 2"
+                 style="height:400px; object-fit:cover;">
+        </div>
+
+ 
+        <div class="carousel-item">
+            <img src="/media/photos/ad1.jpg"
+                 class="d-block w-100"
+                 alt="Ad 3"
+                 style="height:400px; object-fit:cover;">
+        </div>
+
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#adCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#adCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+
+</div> 
+
+
+<br>
+
+<div class="container mt-4">
+    <div class="row g-3">
+        
+{%for i in data%}
+        <div class="col-6 col-md-4 col-lg-3">
+    <a href="{%url 'details' i.id %}" class="text-decoration-none text-dark"232131>
+
+            <div class="card h-100 shadow-sm">
+
+                <img src="{{i.image.url}}"
+                     class="card-img-top"
+                     alt="Product"
+                     style="height:180px; object-fit:cover;"
+                     >
+
+                <div class="card-body">
+
+                    <h6 class="card-title">
+                        name:{{i.name}}
+                    </h6>
+
+                    <h5 class="text-danger">
+                        price:{{i.price}}
+                    </h5>
+                </div>
+
+            </div>
+            </a>
+        </div>
+        {%endfor%}
+           
+             </div>
+            
+             </div>
+             <a href="{%url 'add_products'%}">
+             <button class="btn btn-primary position-fixed"
+        style="bottom:120px; right:20px; z-index:1050;">
+    add product
+</button>
+</a>
+             
+{%endblock%}

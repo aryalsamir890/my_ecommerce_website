@@ -1,0 +1,69 @@
+{%extends 'base.html'%}
+
+{%block body%}
+<div class="container py-5">
+
+    <h2 class="mb-4 fw-bold">My Orders</h2>
+
+    <!-- Order Card -->
+    <div class="card shadow-sm border-0 mb-4">
+        {%for i in data%}
+        <div class="card-body">
+
+            <div class="row align-items-center">
+
+                <!-- Product Image -->
+                <div class="col-md-2 text-center">
+                    <img src="{{i.produ.image.url}}"
+                         class="img-fluid rounded"
+                         alt="Product">
+                </div>
+
+                <!-- Product Details -->
+                <div class="col-md-5">
+
+                    <h5 class="fw-bold mb-2">
+                        {{i.produ.name}}
+                    </h5>
+
+                    <p class="text-muted mb-1">
+                        Order ID: {{i.id}}
+                    </p>
+
+                    <p class="mb-1">
+                        Quantity:
+                        <strong>{{i.quanti}}</strong>
+                    </p>
+
+                    <p class="mb-0">
+                        Ordered On:
+                        <strong>{{i.date}}</strong>
+                    </p>
+
+                </div>
+
+                <!-- Price -->
+                <div class="col-md-2 text-center">
+                    <h5 class="text-success">
+                        Rs. {{i.total}}
+                    </h5>
+                </div>
+
+                <!-- Status -->
+                <div class="col-md-2 text-center">
+
+                </div>
+
+                <!-- Action -->
+                <div class="col-md-1 text-end">
+
+                </div>
+
+            </div>
+
+        </div>
+        {%endfor%}
+    </div>
+
+</div>
+{%endblock%}

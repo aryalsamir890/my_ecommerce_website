@@ -1,0 +1,310 @@
+{%extends 'base.html'%}
+{%block body%}
+<div class="container py-5">
+    {% for message in messages %}
+        <div class="alert
+            {% if message.tags == 'success' %}
+                bg-success-subtle text-success border border-success-subtle
+            {% elif message.tags == 'error' or message.tags == 'danger' %}
+                bg-danger-subtle text-danger border border-danger-subtle
+            {% elif message.tags == 'warning' %}
+                bg-warning-subtle text-warning border border-warning-subtle
+            {% else %}
+                bg-info-subtle text-info border border-info-subtle
+            {% endif %}
+            alert-dismissible fade show shadow"
+            role="alert">
+
+            <strong>
+                {% if message.tags == 'success' %}
+                    ✓ Success!
+                {% elif message.tags == 'error' or message.tags == 'danger' %}
+                    ✕ Error! : 
+                {% elif message.tags == 'warning' %}
+                    ⚠ Warning!
+                {% else %}
+                    ℹ Info
+                {% endif %}
+            </strong>
+
+            {{ message }}
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+    <h2 class="fw-bold mb-4">Checkout</h2>
+
+    <div class="row g-4">
+
+        <!-- Order Summary -->
+        <div class="col-lg-8">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">Order Summary</h5>
+                </div>
+
+
+
+
+
+
+
+
+
+                <div class="card-body">
+{%if prod%}
+                    <!-- Product 1 -->
+                    <div class="row align-items-center">
+
+    <!-- Product Image -->
+    <div class="col-md-3 text-center">
+        <img src="{{ prod.image.url }}"
+             class="img-fluid rounded shadow-sm"
+             style="height:140px; width:140px; object-fit:cover;">
+    </div>
+
+    <!-- Product Details -->
+    <div class="col-md-9">
+
+        <h4 class="fw-bold mb-2">
+            {{ prod.name }}
+        </h4>
+
+        <div class="mb-2">
+           
+            <h4 class="text-muted mb-0">
+            {{ prod.description }}
+            </h4>
+        </div>
+             <span class="badge bg-primary me-2">
+                {{ prod.get_category_display }}
+            </span>
+
+        
+
+    </div>
+
+</div>
+                    <hr>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <h6>Quantity</h6>
+                        <h6>{{quantity}}</h6>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <h6>Subtotal</h6>
+                        <h6>Rs.{{subtotal}}</h6>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <h6>Shipping</h6>
+                        <h6 class="text-success">Rs.100</h6>
+                    </div>
+                    <hr>
+
+                    <div class="d-flex justify-content-between">
+                        <h4>Total</h4>
+                        <h4 class="text-primary">
+                            Rs.{{total}}
+                        </h4>
+                    </div>
+        {%else%}
+
+        <div class="card-body">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Name</th>
+
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th class="text-end">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                    {%for i in cartdata%}
+
+                <tr>
+                    <td class="d-flex align-items-center gap-2">
+        <img src="{{i.produ.image.url}}" alt="{{ item.product.name }}" style="width:40px;height:40px;object-fit:cover;border-radius:4px;">
+    </td>
+                    <td>{{i.produ.name}}</td>
+                    <td>Rs. {{i.produ.price}}</td>
+                    <td>{{i.quantity}}</td>
+                    <td class="text-end">Rs. {{i.total_price}}</td>
+                </tr>
+    {%endfor%}
+
+            </tbody>
+        </table>
+        <hr>
+        <div class="d-flex justify-content-between">
+            <span>Subtotal</span>
+            <span>Rs. {{subtotal}}</span>
+        </div>
+        <div class="d-flex justify-content-between">
+            <span>Delivery Charge</span>
+            <span>Rs. 100</span>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between fw-bold fs-5">
+            <span>Total</span>
+            <span>Rs. {{total}}</span>
+        </div>
+    </div>
+
+        {%endif%}
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Right Side -->
+        <div class="col-lg-4">
+
+            <!-- Shipping -->
+            <div class="card shadow-sm mb-4">
+                <form method='POST' >
+                    {%csrf_token%}
+
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        Shipping Information
+                    </h5>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text"
+                               class="form-control"
+                               value="{{data.name}}"
+                               name="name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input type="text"
+                        value="{{data.phone}}"
+                               class="form-control"
+                               name="phone"
+                               >
+                               <span>{{data.phone.errors}}</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <input type="text"
+                        value="{{data.address}}"
+                               class="form-control"
+                               name="address"
+                               >
+                    </div>
+
+                    <div>
+                        <label class="form-label">
+                            Postal Code
+                        </label>
+
+                        <input type="number"
+                        value="{{data.postal_code}}"
+                               class="form-control"
+                                name="postal_code"
+                               >
+                    </div>
+                </div>
+                
+{%if data.name%}
+<button type="submit" formaction="{%url 'editdata'%}" class="btn btn-outline-primary w-100">
+    ✏️ save changes
+</button>
+{%else%}
+<button type="submit" formaction="{%url 'filldata'%}" class="btn btn-outline-primary w-100">
+    
+    ✏️ save
+</button>
+
+{%endif%}
+</form>
+
+            </div>
+
+            <!-- Payment -->
+            <div class="card shadow-sm">
+
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">
+                        Payment Method
+                    </h5>
+                </div>
+
+                <div class="card-body">
+                    <form method="POST" action="{%url 'placeorder' %}">
+    {%csrf_token%}
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input"
+                               type="radio"
+                               name="payment"
+                               value="Cash"
+                               checked>
+
+                        <label class="form-check-label">
+                            Cash on Delivery
+                        </label>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input"
+                               type="radio"
+                               name="payment"
+                               value="esewa">
+
+                        <label class="form-check-label">
+                            eSewa
+                        </label>
+                    </div>
+
+                    <div class="form-check mb-4">
+                        <input class="form-check-input"
+                               type="radio"
+                               value="Khalti"
+                               name="payment">
+
+                        <label class="form-check-label">
+                            Khalti
+                        </label>
+                    </div>
+                    <div class="d-grid">
+                        
+                        <button type='submit' class="btn btn-success btn-lg">
+                            ✔ Place Order
+                        </button>
+                        
+                    </div>
+                
+</form>
+            </div>
+            
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+{%endblock%}

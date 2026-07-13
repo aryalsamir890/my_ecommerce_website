@@ -1,0 +1,150 @@
+{%extends 'base.html'%}
+
+{%block body%}
+<div class="container my-5">
+
+    <h2 class="fw-bold mb-4">🛒 Shopping Cart</h2>
+
+    <div class="row">
+
+        <!-- Cart Items -->
+        <div class="col-lg-8">
+
+            {%for i in data%}
+            <!-- Cart Item -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body">
+
+                    <div class="row align-items-center">
+
+                        <!-- Image -->
+                        <div class="col-md-3 text-center">
+                            <img src="{{i.produ.image.url}}"
+                                 class="img-fluid rounded"
+                                 style="height:140px; width:140px; object-fit:cover;">
+                        </div>
+
+                        <!-- Product Details -->
+                        <div class="col-md-6">
+
+                            <h4 class="fw-bold mb-2">
+                                {{i.produ.name}}
+                            </h4>
+
+                            <p class="text-muted mb-2">
+{{i.produ.description}}                            </p>
+
+                            <span class="badge bg-primary">
+                                {{i.produ.get_category_display}}
+                            </span>
+
+
+                        </div>
+
+                        <!-- Price & Actions -->
+                        <div class="col-md-3 text-end">
+
+                            <h4 class="text-success fw-bold">
+                                Price: {{i.produ.price}}
+                            </h4>
+                            <h4 class="text-success fw-bold">
+                                Quantity: {{i.quantity}}
+                            </h4>
+
+                            <p class="text-muted mb-3">
+                                Total: {{i.total_price}}
+                            </p>
+                                    <a href="{%url 'remove' i.id%}">
+                            <button class="btn btn-danger btn-sm">
+                                Remove
+                            </button>
+                            </a>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- Another Item -->
+
+           
+
+        </div>
+
+        <!-- Order Summary -->
+
+        <div class="col-lg-4">
+
+            <div class="card shadow border-0 rounded-4 sticky-top" style="top:90px;">
+
+                <div class="card-body">
+
+                    <h3 class="fw-bold mb-4">
+                        Order Summary
+                    </h3>
+
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Subtotal</span>
+                        <strong>Rs: {{subtotal_price}}</strong>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Shipping</span>
+                        <strong class="text-success">
+                            {%if subtotal_price > 0%}
+                           Rs: 100
+                           {%else%}
+                           N/A 
+                           {%endif%}
+                        </strong>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Discount</span>
+                        <strong class="text-danger">
+                            N/A
+                        </strong>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between mb-4">
+
+                        <h4>Total</h4>
+
+                        <h4 class="text-success fw-bold">
+                            {%if subtotal_price > 0%}
+                           Rs: {{total_price}}
+                           {%else%}
+                           N/A 
+                           {%endif%}
+                        </h4>
+
+                    </div>
+                    <a href="{%url 'checkout'%}">
+                    <button class="btn btn-success w-100 mb-3">
+                        Proceed to Checkout
+                    </button>
+                    </a>
+
+                    <a href="{%url 'home'%}">
+                    <button class="btn btn-outline-primary w-100">
+                        Continue Shopping
+                    </button>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{%endblock%}
