@@ -5,7 +5,6 @@ from cart.models import cart
 from django.contrib.auth.decorators import login_required
 
 
-
 def details(request,id):
     data=get_object_or_404(product,id=id)
     reviewdata=reviews.objects.filter(pname=data)
