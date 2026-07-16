@@ -93,6 +93,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'core.context_processors.count',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -135,6 +136,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ACCOUNT_LOGIN_METHODS = {'email'}
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*','password1*', 'password2*']
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+SOCIALACCOUNT_LOGIN_ON_GET = True
 
 LOGIN_REDIRECT_URL='home'
 LOGIN_URL='account_login'

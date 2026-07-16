@@ -38,13 +38,14 @@
                            class="btn btn-outline-secondary px-4">
                             Cancel
                         </a>
-<a href="{% url 'confirm_order' %}">
+<form method="POST" action="{% url 'confirm_order' %}" >
+                        {%csrf_token%}
                             <button type="submit"
                                     class="btn btn-success px-4">
                                 <i class="fa-solid fa-check me-2"></i>
                                 Confirm Order
                             </button>
-</a>
+                        </form>
                     </div>
 
                 </div>

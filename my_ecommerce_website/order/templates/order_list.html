@@ -27,17 +27,21 @@
                     </h5>
 
                     <p class="text-muted mb-1">
-                        Order ID: {{i.id}}
+                        Order ID: {{i.order.id}}
                     </p>
 
                     <p class="mb-1">
                         Quantity:
-                        <strong>{{i.quanti}}</strong>
+                        <strong>{{i.quantity}}</strong>
+                    </p>
+                    <p class="mb-1">
+                        Status:
+                        <strong>{{i.order.status}}</strong>
                     </p>
 
                     <p class="mb-0">
                         Ordered On:
-                        <strong>{{i.date}}</strong>
+                        <strong>{{i.order.date}}</strong>
                     </p>
 
                 </div>

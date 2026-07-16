@@ -2,6 +2,7 @@
     animation: slideDownFade 0.45s ease-out;
 }
 
+
 @keyframes slideDownFade {
     0% {
         opacity: 0;

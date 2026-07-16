@@ -94,7 +94,7 @@ my homepage
 <div class="container mt-4">
     <div class="row g-3">
         
-{%for i in data%}
+{%for i in page_obj%}
         <div class="col-6 col-md-4 col-lg-3">
     <a href="{%url 'details' i.id %}" class="text-decoration-none text-dark"232131>
 
@@ -131,5 +131,73 @@ my homepage
     add product
 </button>
 </a>
+
+<div class="d-flex justify-content-center mt-5">
+    <nav aria-label="Page navigation">
+        <ul class="pagination shadow-sm">
+
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    {% if request.GET.query %}
+                    <a class="page-link rounded-start"
+                       href="?query={{ request.GET.query }}&page={{ page_obj.previous_page_number }}">
+                        <i class="bi bi-chevron-left"></i> Previous
+                    </a>
+                    {% else %}
+                    <a class="page-link rounded-start"
+                       href="?page={{ page_obj.previous_page_number }}">
+                        <i class="bi bi-chevron-left"></i> Previous
+                    </a>
+                    {% endif %}
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link rounded-start">
+                        <i class="bi bi-chevron-left"></i> Previous
+                    </span>
+                </li>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ num }}</span>
+                    </li>
+                {% elif num >= page_obj.number|add:"-2" and num <= page_obj.number|add:"2" %}
+                    <li class="page-item">
+                        {% if request.GET.query %}
+                        <a class="page-link" href="?query={{ request.GET.query }}&page={{ num }}">{{ num }}</a>
+                        {% else %}
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        {% endif %}
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    {% if request.GET.query %}
+                    <a class="page-link rounded-end"
+                       href="?query={{ request.GET.query }}&page={{ page_obj.next_page_number }}">
+                        Next <i class="bi bi-chevron-right"></i>
+                    </a>
+                    {% else %}
+                    <a class="page-link rounded-end"
+                       href="?page={{ page_obj.next_page_number }}">
+                        Next <i class="bi bi-chevron-right"></i>
+                    </a>
+                    {% endif %}
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link rounded-end">
+                        Next <i class="bi bi-chevron-right"></i>
+                    </span>
+                </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+</div>
              
 {%endblock%}

@@ -69,19 +69,15 @@
     <i class="bi bi-cart3 fs-4"></i>
 
     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-        3
+        {{count_data}}
     </span>
 </a>
 
+     <form method="GET" action="{% url 'search' %}" class="d-flex" role="search">
+    <input class="form-control me-2" type="search" value="{{ request.GET.query }}" name="query" placeholder="Search" aria-label="Search" oninput="checkCleared(this)"/>
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
 
-
-      
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-
-      
     </div>
     
     {%if not user.is_authenticated%}
@@ -171,5 +167,12 @@
         </div>
     </div>
 </footer>
+<script>
+function checkCleared(input) {
+    if (input.value === '') {
+        window.location.href = "{% url 'home' %}";
+    }
+}
+</script>
     </body>
     </html>

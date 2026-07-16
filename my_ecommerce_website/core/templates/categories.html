@@ -30,8 +30,64 @@
 
             </div>
             </a>
+            
         </div>
         {%endfor%}
+        
+        <div class="d-flex justify-content-center mt-5">
+    <nav aria-label="Page navigation">
+        <ul class="pagination shadow-sm">
+
+            {% if data.has_previous %}
+                <li class="page-item">
+                    <a class="page-link rounded-start"
+                       href="?page={{ data.previous_page_number }}">
+                        <i class="bi bi-chevron-left"></i> Previous
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link rounded-start">
+                        <i class="bi bi-chevron-left"></i> Previous
+                    </span>
+                </li>
+            {% endif %}
+
+            {% for num in data.paginator.page_range %}
+                {% if data.number == num %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ num }}</span>
+                    </li>
+                {% elif num >= data.number|add:"-2" and num <= data.number|add:"2" %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if data.has_next %}
+                <li class="page-item">
+                    <a class="page-link rounded-end"
+                       href="?page={{ data.next_page_number }}">
+                        Next <i class="bi bi-chevron-right"></i>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link rounded-end">
+                        Next <i class="bi bi-chevron-right"></i>
+                    </span>
+                </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+</div>
+        
              </div>
+             
+             
              </div>
+             
+             
 {% endblock %}

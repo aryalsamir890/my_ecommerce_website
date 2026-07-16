@@ -9,5 +9,6 @@ urlpatterns = [
     path('accounts_app/',include('accounts.urls')),
     path('categories/<str:cate>',views.categories,name='categories'),
     path('add_product/',views.add_product,name='add_products'),
+    path('search/',views.search,name='search'),
     path('cart/',include('cart.urls')),
 ]

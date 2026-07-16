@@ -16,8 +16,7 @@ from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 
 urlpatterns = [
     path('myapp/',views.myapp,name='myapp'),
-
-     path('accounts/login',LoginView.as_view(),name='account_login'),
+    path('accounts/login',LoginView.as_view(),name='account_login'),
     path('accounts/logout/', LogoutView.as_view(), name='account_logout'),
     path('accounts/signup/', SignupView.as_view(), name='account_signup'),
     path('accounts/google/login/', OAuth2LoginView.adapter_view(GoogleOAuth2Adapter), name='google_login'),
