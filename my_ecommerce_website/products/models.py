@@ -19,7 +19,7 @@ class product(models.Model):
     image=models.ImageField(upload_to='photos/')
     quantity=models.IntegerField()
     category=models.CharField(choices=cate)
-    random_order=models.FloatField(default=get_random_value)
+    random_order=models.FloatField(default=get_random_value,blank=True)
 
     def __str__(self):
         return self.name

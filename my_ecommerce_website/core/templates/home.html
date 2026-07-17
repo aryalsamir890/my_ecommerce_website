@@ -1,5 +1,5 @@
 {%extends 'base.html'%}
-
+{% load static %}
 {%block title%}
 my homepage
 {%endblock%}
@@ -53,30 +53,28 @@ my homepage
         <button type="button" data-bs-target="#adCarousel" data-bs-slide-to="2"></button>
     </div>
 
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="/media/photos/ad3.jpg"
-                 class="d-block w-5"
-                 alt="Ad 1"
-                 style="height:400px; object-fit:cover;">
-        </div>
-
-        <div class="carousel-item">
-            <img src="/media/photos/ad2.jpg"
-                 class="d-block w-100"
-                 alt="Ad 2"
-                 style="height:400px; object-fit:cover;">
-        </div>
-
- 
-        <div class="carousel-item">
-            <img src="/media/photos/ad1.jpg"
-                 class="d-block w-100"
-                 alt="Ad 3"
-                 style="height:400px; object-fit:cover;">
-        </div>
-
+   <div class="carousel-inner">
+    <div class="carousel-item active">
+        <img src="{% static 'images/ad3.jpg' %}"
+             class="d-block w-5"
+             alt="Ad 1"
+             style="height:400px; object-fit:cover;">
     </div>
+
+    <div class="carousel-item">
+        <img src="{% static 'images/ad2.jpg' %}"
+             class="d-block w-100"
+             alt="Ad 2"
+             style="height:400px; object-fit:cover;">
+    </div>
+
+    <div class="carousel-item">
+        <img src="{% static 'images/ad1.jpg' %}"
+             class="d-block w-100"
+             alt="Ad 3"
+             style="height:400px; object-fit:cover;">
+    </div>
+</div>
 
     <button class="carousel-control-prev" type="button" data-bs-target="#adCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon"></span>
