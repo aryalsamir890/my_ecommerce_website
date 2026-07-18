@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'anymail',
     'cloudinary_storage',
     'cloudinary',
     'django.contrib.sites',
@@ -176,10 +177,8 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp-relay.brevo.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = '8985d6001@smtp-brevo.com'
-EMAIL_HOST_PASSWORD=config('SMTP_KEY')
+EMAIL_BACKEND = 'anymail.backends.brevo.EmailBackend'
+ANYMAIL = {
+    'BREVO_API_KEY': config('BREVO_API_KEY'),
+}
 DEFAULT_FROM_EMAIL = 'admin@aryalsamir2064.com.np'
